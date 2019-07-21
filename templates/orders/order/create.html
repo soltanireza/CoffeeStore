@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}
+    ثبت سفارش
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <br>
+{#        <h1 class="text-center">ثبت سفارش</h1>#}
+
+        <div class="order-info card bg-secondary text-right float-left col-lg-4">
+            <h3>سفارش شما</h3>
+            <ul>
+                {% for item in cart %}
+                    <li class="text-right">{{ item.quantity }}x {{ item.product.name }} <span> ریال {{ item.total_price }}</span></li>
+                {% endfor %}
+            </ul>
+            <p class="text-left">مجموع: ریال {{ cart.get_total_price }}</p>
+        </div>
+        <form action="." method="post" class="order-form text-right text-justify col-lg-8">
+            {{ form.as_p }}
+            <p><input class="btn btn-success btn-block" type="submit" value="ارسال سفارش"></p>
+            {% csrf_token %}
+        </form>
+    </div>
+{% endblock %}
